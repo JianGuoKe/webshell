@@ -1,12 +1,13 @@
 import './Shell.less';
 import { trackClick } from './tracker';
 import MonacoEditor from 'react-monaco-editor';
-import { Button, Space, Switch, message } from 'antd';
+import { Button, Drawer, Space, Switch, Tabs, message } from 'antd';
 import {
   CaretRightOutlined,
   CheckOutlined,
   ClearOutlined,
   FormatPainterOutlined,
+  TableOutlined,
 } from '@ant-design/icons';
 import { useShortKey } from 'use-short-key';
 import { useEffect, useState } from 'react';
@@ -19,23 +20,28 @@ import prettier from 'prettier/esm/standalone.mjs';
 import typescript from 'prettier/esm/parser-typescript';
 import stringify from 'safe-stable-stringify';
 import JSONC from 'jsonc-simple-parser';
+import { DataTable } from './DataTable';
 
 let theeditor: editor.IStandaloneCodeEditor;
 
 export default function () {
   const [messageApi, contextHolder] = message.useMessage();
+  const [data, setData] = useState([]);
 
   async function runScript() {
     trackClick('runScript', '执行脚本');
     const script = theeditor?.getValue();
     const { run, destroy } = await createWorkerBox(null);
-    const scope = {};
+    const scope = {
+      table: (data: any) => {
+        setData(data);
+        setOpen(true);
+      },
+    };
     try {
       const ret = await run(script, scope);
       if (ret) {
-        messageApi.success('成功：' + ret);
-      } else {
-        messageApi.success('成功');
+        messageApi.success(ret);
       }
     } catch (err) {
       message.error('失败' + (err as any).message);
@@ -174,6 +180,11 @@ export default function () {
   const [code, setCode] = useState(localStorage.getItem('wsh.code') || '');
   useEffect(() => localStorage.setItem('wsh.theme', theme), [theme]);
   useEffect(() => localStorage.setItem('wsh.code', code), [code]);
+  const [open, setOpen] = useState(false);
+
+  function onClose() {
+    setOpen(false);
+  }
 
   function editorDidMount(editor: editor.IStandaloneCodeEditor) {
     theeditor = editor;
@@ -191,6 +202,14 @@ export default function () {
             onClick={runScript}
           >
             F5
+          </Button>
+          <Button
+            type="primary"
+            icon={<TableOutlined />}
+            title="执行结果"
+            onClick={() => setOpen(true)}
+          >
+            结果
           </Button>
         </Space>
         <div className="center">
@@ -240,6 +259,16 @@ export default function () {
         }}
         editorDidMount={editorDidMount}
       ></MonacoEditor>
+      <Drawer
+        title="数据结果"
+        placement={'bottom'}
+        closable={false}
+        onClose={onClose}
+        open={open}
+        className="wsh-result"
+      >
+        <DataTable data={data}></DataTable>
+      </Drawer>
       {contextHolder}
     </div>
   );
