@@ -1,10 +1,9 @@
 import './Shell.less';
 import { trackClick } from './tracker';
 import MonacoEditor from 'react-monaco-editor';
-import { Button, Drawer, Space, Switch, Tabs, message } from 'antd';
+import { Button, Drawer, Popover, Space, Switch, message } from 'antd';
 import {
   CaretRightOutlined,
-  CheckOutlined,
   ClearOutlined,
   FormatPainterOutlined,
   TableOutlined,
@@ -21,12 +20,19 @@ import typescript from 'prettier/esm/parser-typescript';
 import stringify from 'safe-stable-stringify';
 import JSONC from 'jsonc-simple-parser';
 import { DataTable } from './DataTable';
+import { DataText } from './DataText';
 
 let theeditor: editor.IStandaloneCodeEditor;
 
+const dataResults: { [key: string]: any } = {
+  table: DataTable,
+  text: DataText,
+};
+
 export default function () {
   const [messageApi, contextHolder] = message.useMessage();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
+  const [dataView, setDataView] = useState('table');
 
   async function runScript() {
     trackClick('runScript', '执行脚本');
@@ -34,6 +40,12 @@ export default function () {
     const { run, destroy } = await createWorkerBox(null);
     const scope = {
       table: (data: any) => {
+        setDataView('table');
+        setData(data);
+        setOpen(true);
+      },
+      text: (data: any) => {
+        setDataView('text');
         setData(data);
         setOpen(true);
       },
@@ -191,6 +203,8 @@ export default function () {
     theeditor.focus();
   }
 
+  const ResultView = dataResults[dataView] as any;
+
   return (
     <div className={'wsh ' + theme}>
       <div className={'wsh-toolbar'}>
@@ -203,14 +217,24 @@ export default function () {
           >
             F5
           </Button>
-          <Button
-            type="primary"
-            icon={<TableOutlined />}
-            title="执行结果"
-            onClick={() => setOpen(true)}
+          <Popover
+            content={
+              <div>
+                <p>table: 可以显示一个数据集合, 例如:table([xxx,xxx])</p>
+                <p>text: 可以显示一个json文本, 例如:text(xxxx)</p>
+              </div>
+            }
+            title="数据集函数"
           >
-            结果
-          </Button>
+            <Button
+              type="primary"
+              icon={<TableOutlined />}
+              title="执行结果"
+              onClick={() => setOpen(true)}
+            >
+              结果
+            </Button>
+          </Popover>
         </Space>
         <div className="center">
           <Space>
@@ -256,6 +280,13 @@ export default function () {
         language="typescript"
         options={{
           automaticLayout: true,
+          scrollbar: {
+            // vertical: 'hidden',
+          },
+          minimap: {
+            // autohide: true,
+            enabled: false,
+          },
         }}
         editorDidMount={editorDidMount}
       ></MonacoEditor>
@@ -265,9 +296,19 @@ export default function () {
         closable={false}
         onClose={onClose}
         open={open}
+        extra={
+          <Space>
+            <Button
+              type="text"
+              icon={<ClearOutlined />}
+              onClick={() => setData([])}
+              title="清空数据结果"
+            ></Button>
+          </Space>
+        }
         className="wsh-result"
       >
-        <DataTable data={data}></DataTable>
+        <ResultView data={data}></ResultView>
       </Drawer>
       {contextHolder}
     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import _ from 'lodash';
+import './DataTable.less';
 
 export function DataTable(props: { data: any }) {
   let data = props.data;
@@ -41,6 +42,7 @@ export function DataTable(props: { data: any }) {
   }));
   return (
     <Table
+      className="wsh-result-table"
       columns={columns}
       dataSource={data}
       size="small"
