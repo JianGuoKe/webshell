@@ -7,19 +7,13 @@
   &-toolbar {
     // background-color: #fff;
     padding: 5px 20px;
+    display: flex;
 
-    button,
-    .theme {
-      margin: 0 3px;
-    }
     button {
       box-shadow: none;
       background-color: transparent;
     }
     .theme {
-      float: right;
-      top: 3px;
-
       &.ant-switch-checked:not(.ant-switch-disabled) {
         // .ant-switch-inner-checked {
         //   color: #ccc;
@@ -29,6 +23,17 @@
           background: #333333;
         }
       }
+    }
+
+    .left,
+    .right {
+      width: 100px;
+    }
+
+    .center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
   }
 
