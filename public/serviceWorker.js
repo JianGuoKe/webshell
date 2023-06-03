@@ -1,5 +1,5 @@
 // cache名, 在控制台Application的CaChe下可以看到
-const cacheName = 'jianguoke.webshell';
+const cacheName = 'jianguoke.wsh';
 // cache文件
 const cacheFiles = [
   /* CACHEFILES */

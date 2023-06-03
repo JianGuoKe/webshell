@@ -23,8 +23,8 @@ const assets = ['/', '/index.html'].concat(
       k.replace(/\\/g, '/').split('/').slice(1).join('/')
   )
 );
-console.log(assets);
 // 记录生成的缓存文件
 let sw = fs.readFileSync('./dist/serviceWorker.js', 'utf-8');
-sw = sw.replace('[/* CACHEFILES */]', JSON.stringify(assets));
+const text = JSON.stringify(assets);
+sw = sw.replace(`/* CACHEFILES */`, text.substring(1, text.length - 1));
 fs.writeFileSync('./dist/serviceWorker.js', sw);
