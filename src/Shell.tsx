@@ -6,6 +6,8 @@ import {
   CaretRightOutlined,
   ClearOutlined,
   FormatPainterOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
   TableOutlined,
 } from '@ant-design/icons';
 import { useShortKey } from 'use-short-key';
@@ -31,8 +33,9 @@ const dataResults: { [key: string]: any } = {
 
 export default function () {
   const [messageApi, contextHolder] = message.useMessage();
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
   const [dataView, setDataView] = useState('table');
+  const [isFull, setFull] = useState(false);
 
   async function runScript() {
     trackClick('runScript', '执行脚本');
@@ -211,6 +214,7 @@ export default function () {
         <Space className="left">
           <Button
             type="primary"
+            className="run"
             icon={<CaretRightOutlined />}
             title="F5执行脚本"
             onClick={runScript}
@@ -266,8 +270,8 @@ export default function () {
           ></Button>
           <Switch
             className="theme"
-            checkedChildren="深色"
-            unCheckedChildren="浅色"
+            checkedChildren="深"
+            unCheckedChildren="浅"
             checked={theme === 'dark'}
             onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
           />
@@ -296,19 +300,31 @@ export default function () {
         closable={false}
         onClose={onClose}
         open={open}
+        height={isFull ? '100%' : ''}
         extra={
           <Space>
             <Button
               type="text"
+              title="放大"
+              icon={
+                isFull ? <FullscreenExitOutlined /> : <FullscreenOutlined />
+              }
+              onClick={() => setFull(!isFull)}
+            ></Button>
+            <Button
+              type="text"
               icon={<ClearOutlined />}
-              onClick={() => setData([])}
+              onClick={() => {
+                setData([]);
+                setOpen(false);
+              }}
               title="清空数据结果"
             ></Button>
           </Space>
         }
         className="wsh-result"
       >
-        <ResultView data={data}></ResultView>
+        <ResultView data={data} isFull={isFull}></ResultView>
       </Drawer>
       {contextHolder}
     </div>

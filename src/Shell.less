@@ -41,7 +41,46 @@
     }
   }
 
+  @media screen and (max-width: 800px) {
+    .wsh-toolbar {
+      padding: 2px 10px;
+
+      .left,
+      .right {
+        width: auto;
+      }
+
+      .ant-btn {
+        > span:not(.ant-btn-icon) {
+          display: none;
+        }
+      }
+
+      .ant-btn:not(.ant-btn-icon-only) > .ant-btn-icon.ant-btn-loading-icon,
+      :where(.css-dev-only-do-not-override-5c8z57).ant-btn:not(
+          .ant-btn-icon-only
+        )
+        > .ant-btn-icon:not(:last-child) {
+        margin-inline-end: 0;
+      }
+
+      .ant-space-item {
+        .ant-btn {
+          padding: 0;
+
+          &.run {
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+        }
+      }
+    }
+  }
+
   &-result {
+    .ant-drawer-header {
+      padding: 5px 10px;
+    }
     .ant-drawer-body {
       padding: 0;
     }

@@ -1,10 +1,9 @@
-import React from 'react';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import _ from 'lodash';
 import './DataTable.less';
 
-export function DataTable(props: { data: any }) {
+export function DataTable(props: { data: any; isFull: boolean }) {
   let data = props.data;
   if (!_.isArray(data)) {
     if (_.isObject(data)) {
@@ -40,10 +39,14 @@ export function DataTable(props: { data: any }) {
       return JSON.stringify(value);
     },
   }));
+
+  const h = props.isFull ? window.innerHeight : 378;
+
   return (
     <Table
       className="wsh-result-table"
       columns={columns}
+      scroll={{ y: h - 43 - 39 }}
       dataSource={data}
       size="small"
       pagination={false}
