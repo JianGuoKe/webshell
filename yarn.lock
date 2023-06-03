@@ -3278,6 +3278,11 @@ urix@^0.1.0:
   resolved "https://registry.npmmirror.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==
 
+use-short-key@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmmirror.com/use-short-key/-/use-short-key-0.0.3.tgz#08a79aabc666b9140ade18d7be5599dc163d00b4"
+  integrity sha512-tttEVV5c6Cg8P6pjDj4Ly+8WlH5GDqLWdMN0NGCUzvUxKMXK13EwvHMEdp7ybG+nZy+3AWcsmmwGprEYCr2olg==
+
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
@@ -3342,6 +3347,11 @@ vite@^3.2.3:
     rollup "^2.79.1"
   optionalDependencies:
     fsevents "~2.3.2"
+
+workerboxjs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npmmirror.com/workerboxjs/-/workerboxjs-6.0.0.tgz#2f9f6a754fc4e6277242bd216e60f0cbe3acfc87"
+  integrity sha512-4tDnKh7E6aAr/bgkX8KM09BzMudz2EFtQThgddeNrQOLmZlxqFa4VM559/rbzqoEHnrL0sju8jJZuSvQHsb8Yw==
 
 wrappy@1:
   version "1.0.2"

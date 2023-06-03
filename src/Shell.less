@@ -6,6 +6,51 @@
 
   &-toolbar {
     // background-color: #fff;
-    padding: 5px;
+    padding: 5px 20px;
+
+    button,
+    .theme {
+      margin: 0 3px;
+    }
+    button {
+      box-shadow: none;
+      background-color: transparent;
+    }
+    .theme {
+      float: right;
+      top: 3px;
+
+      &.ant-switch-checked:not(.ant-switch-disabled) {
+        // .ant-switch-inner-checked {
+        //   color: #ccc;
+        // }
+
+        .ant-switch-handle::before {
+          background: #333333;
+        }
+      }
+    }
+  }
+
+  &.light {
+    background: #fff;
+
+    .wsh-toolbar {
+      button,
+      .theme {
+        color: #1e1e1e;
+
+        &:hover {
+          color: #000;
+          background-color: #eee;
+        }
+      }
+
+      .theme {
+        .ant-switch-inner-unchecked {
+          color: #ccc;
+        }
+      }
+    }
   }
 }
