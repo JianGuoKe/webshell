@@ -260,7 +260,7 @@ export default function () {
         editorDidMount={editorDidMount}
       ></MonacoEditor>
       <Drawer
-        title="数据结果"
+        title="执行结果"
         placement={'bottom'}
         closable={false}
         onClose={onClose}

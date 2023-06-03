@@ -15,6 +15,14 @@ export function DataTable(props: { data: any }) {
         },
       ];
     }
+  } else {
+    data = data.map((row) => {
+      if (!_.isObject(row)) {
+        return { value: row };
+      } else {
+        return row;
+      }
+    });
   }
 
   const columns: ColumnsType<any> = Array.from(
