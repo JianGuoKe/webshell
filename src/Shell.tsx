@@ -14,7 +14,7 @@ import createWorkerBox from 'workerboxjs';
 import 'monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution';
 import 'monaco-editor/esm/vs/language/json/monaco.contribution';
 import { editor } from 'monaco-editor/esm/vs/editor/editor.api';
-import 'monaco-editor/esm/vs/editor/editor.all.js';
+// import 'monaco-editor/esm/vs/editor/editor.all.js';
 import prettier from 'prettier/esm/standalone.mjs';
 import typescript from 'prettier/esm/parser-typescript';
 import stringify from 'safe-stable-stringify';
@@ -235,6 +235,9 @@ export default function () {
         value={code}
         onChange={setCode}
         language="typescript"
+        options={{
+          automaticLayout: true,
+        }}
         editorDidMount={editorDidMount}
       ></MonacoEditor>
       {contextHolder}
