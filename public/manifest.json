@@ -1,0 +1,19 @@
+{
+  "id": "wsh.jianguoke.cn",
+  "name": "",
+  "short_name": "脚本 | 坚果壳",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "一个在浏览器里执行的脚本Shell",
+  "theme_color": "#202124",
+  "start_url": "/",
+  "lang": "zh-cn",
+  "url": "https://wsh.jianguoke.cn",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }
+  ]
+}

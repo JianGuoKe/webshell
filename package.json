@@ -1,0 +1,47 @@
+{
+  "name": "@jianguoke/webshell",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5179 --open --host",
+    "build": "tsc && vite build --base=https://static.jianguoke.cn/wsh/ && node ./upCaches.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@aliyun-sls/web-track-browser": "^0.2.6",
+    "@ant-design/icons": "^4.8.0",
+    "antd": "^5.0.3",
+    "dayjs": "^1.11.6",
+    "monaco-editor": "^0.38.0",
+    "react": "^18.2.0",
+    "react-custom-scrollbars-2": "^4.5.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@types/crypto-js": "^4.1.1",
+    "@types/lodash": "^4.14.191",
+    "@types/react": "^18.0.24",
+    "@types/react-custom-scrollbars": "^4.0.10",
+    "@types/react-dom": "^18.0.8",
+    "@types/shortid": "^0.0.29",
+    "@vitejs/plugin-react": "^2.2.0",
+    "autoprefixer": "^10.4.14",
+    "consola": "^2.15.3",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
+    "lib-flexible": "^0.3.2",
+    "postcss-px-to-viewport": "^1.1.1",
+    "postcss-px2rem-exclude": "^0.0.6",
+    "postcss-pxtorem": "^6.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-static-copy": "^0.12.0",
+    "vite-plugin-style-import": "^2.0.0",
+    "vite-pwa": "^1.0.2"
+  }
+}
