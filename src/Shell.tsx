@@ -192,7 +192,9 @@ export default function () {
   const [theme, setTheme] = useState(
     localStorage.getItem('wsh.theme') || 'dark'
   );
-  const [code, setCode] = useState(localStorage.getItem('wsh.code') || '');
+  const [code, setCode] = useState(
+    localStorage.getItem('wsh.code') || 'table([1,2,3]);'
+  );
   useEffect(() => localStorage.setItem('wsh.theme', theme), [theme]);
   useEffect(() => localStorage.setItem('wsh.code', code), [code]);
   const [open, setOpen] = useState(false);
